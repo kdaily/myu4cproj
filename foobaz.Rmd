@@ -47,7 +47,7 @@ thisScript <- getPermlink(getRepo("kdaily/myu4cproj"),
 thisFile <- File(thisScript, name="foobaz.Rmd", parentId="syn4154686", synapseStore=FALSE)
 thisFile <- synStore(thisFile)
 
-knitfile2synapse(file = "./baz.Rmd", 
+knitfile2synapse(file = "./foobaz.Rmd", 
                  owner = 'syn3642859', 
                  wikiName = "Merge foo and bar.",overwrite=F)
 
