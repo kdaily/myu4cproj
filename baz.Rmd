@@ -41,10 +41,11 @@ Then, outside of this file, you'll run the following:
 library(rGithubClient)
 library(knit2synapse)
 
-thisRepo <- getRepo("kdaily/myu4cproj")
-thisScript <- getPermlink(thisRepo, "baz.Rmd")
+thisScript <- getPermlink(getRepo("kdaily/myu4cproj"), 
+                          "baz.Rmd")
 
-thisFile <- File(, )
+thisFile <- File(thisScript, name="baz.Rmd", parentId="syn4154686", synapseStore=FALSE)
+thisFile <- synStore(thisFile)
 
 knitfile2synapse(file = "./baz.Rmd", 
                  owner = 'syn3642859', 
@@ -52,10 +53,19 @@ knitfile2synapse(file = "./baz.Rmd",
 
 ```
 
-You can also embed plots, for example:
+Get our data files from Synapse:
 
-```{r, echo=FALSE}
-plot(cars)
+```{r getfiles, echo=TRUE}
+fooFile <- synGet("syn4156093")
+foo <- read.csv(getFileLocation(fooFile))
+
+bazFile <- synGet("syn4155088")
+baz <- read.csv(getFileLocation(bazFile))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Let's merge them:
+
+```{r merge, echo=TRUE}
+merged <- left_join(foo, baz, by="ID")
+```
+
