@@ -6,10 +6,10 @@ output: html_document
 ---
 
 ```{r loadlibs, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
-library('synapseClient')
-library('reshape2')
-library('knitr')
-library('dplyr')
+library(synapseClient)
+library(knitr)
+library(dplyr)
+library(ggplot2)
 
 synapseLogin()
 
@@ -69,3 +69,11 @@ Let's merge them:
 merged <- left_join(foo, baz, by="ID")
 ```
 
+Let's make a basic plot showing the distributions of `V1` for each `foo`, grouped by `bar` across patients:
+
+```{r summaryplot, echo=TRUE}
+p <- ggplot(merged, aes(x=foo, y=V1))
+p <- p + geom_boxplot()
+p <- p + facet_wrap( ~ bar)
+p
+```
