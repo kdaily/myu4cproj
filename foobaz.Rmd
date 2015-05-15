@@ -51,7 +51,8 @@ thisFile <- synStore(thisFile)
 
 knitfile2synapse(file = myFileName,
                  owner = 'syn3642859', 
-                 wikiName = "Merge foo and bar.",overwrite=F)
+                 wikiName = "Merge foo and bar.",
+                 overwrite=T)
 
 ```
 
@@ -72,7 +73,7 @@ merged <- left_join(foo, baz, by="ID")
 ```
 
 Now, store the merged file in Synapse with provenance showing the input files and this file that we ran:
-```{r store}
+```{r store, echo=TRUE}
 write.csv(merged, file='merged.csv', row.names=FALSE)
 
 mergedFile <- File('merged.csv', parentId='syn4154679')
