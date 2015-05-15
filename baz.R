@@ -11,7 +11,7 @@ myMat <- as.data.frame(matrix(runif(NCols*NRows),
 myMat <- cbind(ID=sprintf("ID%04d", 1:nrow(myMat)),
                myMat)
 
-write.csv(myMat, file="baz.csv")
+write.csv(myMat, file="baz.csv", row.names=FALSE)
 
 # Save this script to Synapse in the Code directory
 thisScript <- File("./baz.R", parentId='syn4154686')

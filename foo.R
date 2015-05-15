@@ -11,7 +11,7 @@ myDF <- data.frame(ID=sprintf("ID%04d", 1:NRows),
                    bar=rep(c(TRUE, FALSE), times=NRows / 2),
                    baz=rep(c(1, 2, 3, 4), each=NRows / 4))
 
-write.csv(myDF, file="foo.csv")
+write.csv(myDF, file="foo.csv", row.names=FALSE)
 
 # This script lives in Github
 # To connect it to show that a file was generated using it,
