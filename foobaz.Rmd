@@ -42,9 +42,9 @@ library(rGithubClient)
 library(knit2synapse)
 
 thisScript <- getPermlink(getRepo("kdaily/myu4cproj"), 
-                          "baz.Rmd")
+                          "foobaz.Rmd")
 
-thisFile <- File(thisScript, name="baz.Rmd", parentId="syn4154686", synapseStore=FALSE)
+thisFile <- File(thisScript, name="foobaz.Rmd", parentId="syn4154686", synapseStore=FALSE)
 thisFile <- synStore(thisFile)
 
 knitfile2synapse(file = "./baz.Rmd", 
@@ -63,13 +63,24 @@ bazFile <- synGet("syn4155088")
 baz <- read.csv(getFileLocation(bazFile))
 ```
 
-Let's merge them:
+First, merge them:
 
 ```{r merge, echo=TRUE}
 merged <- left_join(foo, baz, by="ID")
 ```
 
-Let's make a basic plot showing the distributions of `V1` for each `foo`, grouped by `bar` across patients:
+Now, store the merged file in Synapse with provenance showing the input files and this file that we ran:
+```{r store}
+write.csv(merged, file='merged.csv', row.names=FALSE)
+
+mergedFile <- File('merged.csv', parentId='syn4154679')
+
+mergedFile <- synStore(mergedFile,
+                       used=c(bazFile, fooFile),
+                       executed=thisFile)
+```
+
+Here's a basic plot showing the distributions of `V1` for each `foo`, grouped by `bar` across patients:
 
 ```{r summaryplot, echo=TRUE}
 p <- ggplot(merged, aes(x=foo, y=V1))
