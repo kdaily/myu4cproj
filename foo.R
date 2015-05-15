@@ -17,7 +17,7 @@ write.csv(myDF, file="foo.csv")
 # To connect it to show that a file was generated using it,
 # I get the most recent commit (requires you commit and push to Github first!)
 thisRepo <- getRepo("kdaily/myu4cproj")
-thisScript <- getPermlink("foo.R")
+thisScript <- getPermlink(thisRepo, "foo.R")
 
 # Save the output file to Synapse in the Data directory
 f <- File("./foo.csv", parentId='syn4154679')
