@@ -50,7 +50,7 @@ thisFile <- File(thisScript, name=myFileName, parentId="syn4154686", synapseStor
 thisFile <- synStore(thisFile)
 
 knitfile2synapse(file = myFileName,
-                 owner = 'syn3642859', 
+                 owner = thisFile@properties$id, 
                  wikiName = "Merge foo and bar.",
                  overwrite=T)
 
