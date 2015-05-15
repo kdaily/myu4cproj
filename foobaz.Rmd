@@ -41,13 +41,15 @@ Then, outside of this file, you'll run the following:
 library(rGithubClient)
 library(knit2synapse)
 
-thisScript <- getPermlink(getRepo("kdaily/myu4cproj"), 
-                          "foobaz.Rmd")
+myFileName <- "foobaz.Rmd"
 
-thisFile <- File(thisScript, name="foobaz.Rmd", parentId="syn4154686", synapseStore=FALSE)
+thisScript <- getPermlink(getRepo("kdaily/myu4cproj"), 
+                          myFileName)
+
+thisFile <- File(thisScript, name=myFileName, parentId="syn4154686", synapseStore=FALSE)
 thisFile <- synStore(thisFile)
 
-knitfile2synapse(file = "./foobaz.Rmd", 
+knitfile2synapse(file = myFileName,
                  owner = 'syn3642859', 
                  wikiName = "Merge foo and bar.",overwrite=F)
 
